@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Ma page d'accueil{% endblock %}
+{% block content %}
+    <h2>Bienvenue !</h2>
+    <p>Le max. des multiplicandes est {{ max_multiplicande }}.</p>
+
+  <p>{% if max_multiplicande|divisibleby:"2" %}
+     Cette valeur est paire.
+  {% else %}
+     Cette valeur est impaire.
+  {% endif %}</p>
+
+<p>Le max. des multiplicateurs est {{ max_multiplicateur }}.</p>
+
+
+<ul>
+{% for ligne in mes_lignes %}
+    <li>{{ ligne }}</li>
+{% endfor %}
+</ul>
+
+<p><a href="{% url "afficher_article" 42 %}">
+    Lien vers mon super article N° 42
+</a></p>
+
+{% comment %}
+<p><a href="/blog/article/42">
+    Lien vers mon super article n° 42
+</a></p>
+{% endcomment %}
+
+
+
+    <p>
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus 
+       massa non tortor. Vestibulum diam diam, posuere in viverra in, 
+       ullamcorper et libero. Donec eget libero quis risus congue imperdiet ac 
+       id lectus. Nam euismod cursus arcu, et consequat libero ullamcorper sit 
+       amet.
+    </p>
+{% endblock %}
