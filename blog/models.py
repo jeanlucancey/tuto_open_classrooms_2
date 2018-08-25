@@ -10,14 +10,18 @@ class Categorie(models.Model):
 class Article(models.Model):
     titre = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    auteur = models.CharField(max_length=42)
+    auteur = models.CharField(max_length=42, verbose_name="Nom de l'auteur")
     contenu = models.TextField(null=True)
     date = models.DateTimeField(default=timezone.now, 
                                 verbose_name="Date de parution")
-    categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE)
+    # Ce qui suit est une variante
+    # date = models.DateTimeField(auto_now_add=True, auto_now=False, 
+    #                             verbose_name="Date de parution")
+    categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE, \
+                                  verbose_name="Catégorie")
     
     class Meta:
-        verbose_name = "article"
+        verbose_name = "article" # Mention employée dans l'interface d'admin
         ordering = ['date']
     
     def __str__(self):
