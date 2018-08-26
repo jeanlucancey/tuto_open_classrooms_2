@@ -1,28 +1,49 @@
 from django.contrib import admin
-from django.utils.text import Truncator
-
 from blog.models import Categorie, Article
 
 class ArticleAdmin(admin.ModelAdmin):
+
+    # La ligne qui suit est censée remplir le slug avec du Javascript... mais
+    # ça ne marche pas en l'inscrivant ici. Où d'autre? Mystère.
+    prepopulated_fields = {'slug': ('titre', ), }
+    # Autre syntaxe suggérée et que je ne parviens pas non plus à faire fonctionner:
+    # prepopulated_fields = {'slug': ['titre'] }
+
+    # Configuration de la liste d'articles
     list_display   = ('titre', 'categorie', 'auteur', 'date', 'apercu_contenu')
     list_filter    = ('auteur','categorie', )
     date_hierarchy = 'date'
-    ordering       = ('-date', )
+    ordering       = ('date', )
     search_fields  = ('titre', 'contenu')
 
-    # Ce qui suit (facultatif) concerne la présentation du formulaire
-    fields = ('date', 'titre', 'auteur', 'categorie', 'contenu')
-    
+    # Configuration du formulaire d'édition
+    fieldsets = (
+        # Fieldset 1 : meta-info (titre, auteur…)
+       ('Général', {
+            'classes': ['collapse', ],
+            'fields': ('titre', 'slug', 'auteur', 'categorie')
+        }),
+        # Fieldset 2 : contenu de l'article
+        ('Contenu de l\'article', {
+           'description': 'Le formulaire accepte les balises HTML. Utilisez-les à bon escient !',
+           'fields': ('contenu', )
+        }),
+    )
+
+    # Colonnes personnalisées 
     def apercu_contenu(self, article):
         """ 
-        Permet un traitement du champ au lieu de l'afficher brut de fonderie.
-        En l'occurrence, retourne les premiers caractères du contenu de l'article, 
-        suivi de points de suspension si le texte est plus long. 
+        Retourne les 40 premiers caractères du contenu de l'article. S'il
+        y a plus de 40 caractères, il faut rajouter des points de suspension.
         """
-        return Truncator(article.contenu).chars(15, truncate='...')
-        # return '{' + Truncator(article.contenu).chars(15, truncate='...') + '}'
+# Tout ce qui suit aurait pu être remplacé par la ligne suivante:
+#        return Truncator(article.contenu).chars(40, truncate='...')
+        text = article.contenu[0:40]
+        if len(article.contenu) > 40:
+            return '%s…' % text
+        else:
+            return text
 
-    # En-tête de notre colonne
     apercu_contenu.short_description = 'Aperçu du contenu'
 
 admin.site.register(Categorie)
