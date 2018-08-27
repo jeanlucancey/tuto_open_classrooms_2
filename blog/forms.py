@@ -40,3 +40,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
+        # ou encore:
+        # fields = ('titre', 'contenu', )
+        # A la place, on peut faire eventuellement quelque chose du genre:
+        # exclude = ('auteur', 'categorie', 'slug')
