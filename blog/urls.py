@@ -19,4 +19,5 @@ urlpatterns = [
     path('mapage', views.ma_page),
     path('addition/<int:nombre1>/<int:nombre2>/', views.addition),
     path('proust', views.cree_proust),
+    path('contact/', views.contact, name='contact'),
 ]

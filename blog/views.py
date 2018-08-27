@@ -2,13 +2,15 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from blog.models import Article
+from .forms import ContactForm
 
 def home(request):
-    """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
-    return HttpResponse("""
-        <h1>Bienvenue sur mon blog !</h1>
-        <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
-    """)
+#    """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
+#    return HttpResponse("""
+#        <h1>Bienvenue sur mon blog !</h1>
+#        <p>Les crêpes bretonnes ça tue des mouettes en plein vol !</p>
+#    """)
+    return render(request, 'blog/home.html', locals())
 
 def accueil(request):
     """ Afficher tous les articles de notre blog """
@@ -100,3 +102,25 @@ def cree_proust(request):
     return HttpResponse(
         "En principe, l'article de %s a été créé." % (art.auteur)
     )
+
+def contact(request):
+    # Construire le formulaire, soit avec les données postées,
+    # soit vide si l'utilisateur accède pour la première fois
+    # à la page.
+    form = ContactForm(request.POST or None)
+    # Nous vérifions que les données envoyées sont valides
+    # Cette méthode renvoie False s'il n'y a pas de données 
+    # dans le formulaire ou qu'il contient des erreurs.
+    if form.is_valid(): 
+        # Ici nous pouvons traiter les données du formulaire
+        sujet = form.cleaned_data['sujet']
+        message = form.cleaned_data['message']
+        envoyeur = form.cleaned_data['envoyeur']
+        renvoi = form.cleaned_data['renvoi']
+
+        # Nous pourrions ici envoyer l'e-mail grâce aux données 
+        # que nous venons de récupérer
+        envoi = True
+    
+    # Quoiqu'il arrive, on affiche la page du formulaire.
+    return render(request, 'blog/contact.html', locals())

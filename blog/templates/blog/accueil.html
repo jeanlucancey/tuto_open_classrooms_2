@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Le blog des crêpes bretonnes{% endblock %}
+{% block content %}
 <h1>Bienvenue sur le blog des crêpes bretonnes !</h1>
 
 {% for article in derniers_articles %}
@@ -10,3 +13,4 @@
 {% empty %}
     <p>Aucun article.</p>
 {% endfor %}
+{% endblock %}
