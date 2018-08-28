@@ -1,17 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Le blog des crêpes bretonnes{% endblock %}
+{% block title %}Page de contact{% endblock %}
 {% block content %}
+
 <h1>Ceci est censé être la page de contact</h1>
 
 {% if envoi %}Votre message a bien été envoyé !{% endif %}
 
 <form action="{% url "contact" %}" method="post">
-    {% comment %}
-    La ligne qui suit est contre les attaques de type "Cross Site Request Forgery"
-    {% endcomment %}
     {% csrf_token %}
     
     {{ form.as_p }}
     <input type="submit" value="Submit" />
 </form>
+
+<h1>Ajouter un nouveau contact</h1>
+
+{% if sauvegarde %}
+    <p>Ce contact a bien été enregistré.</p>
+{% endif %}
+   
+<p>
+<form method="post" enctype="multipart/form-data" action=".">
+    {% comment %}
+    La ligne qui suit est contre les attaques de type "Cross Site Request Forgery"
+    {% endcomment %}
+       {% csrf_token %}
+       {{ form.as_p }}
+       <input type="submit"/>
+</form>
+</p>
+
 {% endblock %}

@@ -44,3 +44,8 @@ class ArticleForm(forms.ModelForm):
         # fields = ('titre', 'contenu', )
         # A la place, on peut faire eventuellement quelque chose du genre:
         # exclude = ('auteur', 'categorie', 'slug')
+
+class NouveauContactForm(forms.Form):
+    nom = forms.CharField()
+    adresse = forms.CharField(widget=forms.Textarea)
+    photo = forms.ImageField()
