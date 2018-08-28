@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Voir les contacts{% endblock %}
+{% block content %}
+
+<h1>Liste des contacts</h1>
+{% for contact in contacts %}
+    <h2>{{ contact.nom }}</h2>
+    Adresse : {{ contact.adresse|linebreaks }}<br/>
+    <img src="{{ contact.photo.url }}"/>
+{% endfor %}
+
+{% endblock %}

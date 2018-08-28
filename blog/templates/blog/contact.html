@@ -2,6 +2,7 @@
 {% block title %}Page de contact{% endblock %}
 {% block content %}
 
+{% comment %}
 <h1>Ceci est censé être la page de contact</h1>
 
 {% if envoi %}Votre message a bien été envoyé !{% endif %}
@@ -12,6 +13,7 @@
     {{ form.as_p }}
     <input type="submit" value="Submit (ou envoyer, en français)" />
 </form>
+{% endcomment %}
 
 <h1>Ajouter un nouveau contact</h1>
 

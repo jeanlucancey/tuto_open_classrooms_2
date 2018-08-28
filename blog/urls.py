@@ -21,4 +21,5 @@ urlpatterns = [
     path('proust', views.cree_proust),
     path('contact/', views.contact, name='contact'),
     path('article_contact/', views.article_contact, name='article_contact'),
+    path('voir_contacts/', views.voir_contacts, name='voir_contacts'),
 ]

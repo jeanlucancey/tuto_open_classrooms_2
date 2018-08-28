@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
-from blog.models import Article
+from blog.models import Article, Contact
 from .forms import ContactForm, ArticleForm
 
 def home(request):
@@ -148,3 +148,10 @@ def nouveau_contact(request):
         'form': form, 
         'sauvegarde': sauvegarde
     })
+
+def voir_contacts(request):
+    return render(
+        request, 
+        'blog/voir_contacts.html', 
+        {'contacts': Contact.objects.all()}
+    )
