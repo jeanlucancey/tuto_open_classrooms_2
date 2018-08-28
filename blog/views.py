@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from blog.models import Article
-from .forms import ContactForm
+from .forms import ContactForm, ArticleForm
 
 def home(request):
 #    """ Exemple de page non valide au niveau HTML pour que l'exemple soit concis """
@@ -124,3 +124,27 @@ def contact(request):
     
     # Quoiqu'il arrive, on affiche la page du formulaire.
     return render(request, 'blog/contact.html', locals())
+
+def article_contact(request):
+    form = ArticleForm(request.POST or None)
+    if form.is_valid(): 
+        envoi = True
+    
+    # Quoiqu'il arrive, on affiche la page du formulaire.
+    return render(request, 'blog/article_contact.html', locals())
+
+def nouveau_contact(request):
+    sauvegarde = False
+    form = NouveauContactForm(request.POST or None, request.FILES)
+    if form.is_valid():
+        contact = Contact()
+        contact.nom = form.cleaned_data["nom"]
+        contact.adresse = form.cleaned_data["adresse"]
+        contact.photo = form.cleaned_data["photo"]
+        contact.save()
+        sauvegarde = True
+
+    return render(request, 'contact.html', {
+        'form': form, 
+        'sauvegarde': sauvegarde
+    })

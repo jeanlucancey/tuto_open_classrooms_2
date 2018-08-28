@@ -10,12 +10,12 @@ class ContactForm(forms.Form):
         required=False
     )
 
-    def clean_message(self):
-        message = self.cleaned_data['message']
-        if "pizza" in message:
-            raise forms.ValidationError("On ne veut pas entendre parler de pizza !")
-
-        return message  # Ne pas oublier de renvoyer le contenu du champ traité
+#    def clean_message(self):
+#        message = self.cleaned_data['message']
+#        if "pizza" in message:
+#            raise forms.ValidationError("On ne veut pas entendre parler de pizza !")
+#
+#        return message  # Ne pas oublier de renvoyer le contenu du champ traité
 
     def clean(self):
         cleaned_data = super(ContactForm, self).clean()

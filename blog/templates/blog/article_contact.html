@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Page de contact pour les articles{% endblock %}
+{% block content %}
+
+<h1>Ceci est censé être la page de contact pour les articles</h1>
+
+{% if envoi %}Votre message a bien été envoyé !{% endif %}
+
+<form action="{% url "article_contact" %}" method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    <input type="submit" value="Submit (ou envoyer, en français)" />
+</form>
+
+{% endblock %}
