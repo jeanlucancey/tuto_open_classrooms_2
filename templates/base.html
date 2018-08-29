@@ -18,6 +18,14 @@
    <section id="content">
        {% block content %}{% endblock %}
    </section>
-<footer>&copy; Crêpes bretonnes</footer>
+   <footer>&copy; Crêpes bretonnes</footer>
+
+   {% comment %}
+   <!-- Tentatives toutes vaines pour afficher une image -->
+   <p>A<img src="/photos/photomaton.jpg"/></p>
+   <p>B<img src="media/photos/photomaton.jpg"/></p>
+   <p>C<img src="/media/photos/photomaton.jpg"/></p>
+   {% endcomment %}
+
 </body>
 </html>
