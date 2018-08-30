@@ -3,5 +3,15 @@
 {% block content %}
 <h1>Bienvenue sur la page des raccourcisseurs d'URL&nbsp;!</h1>
 
-<p>C'est pas parce qu'on n'a rien à dire qu'il faut fermer sa gueule.</p>
+{% if envoi %}
+<p>Votre URL a bien été envoyée... sur cette page !</p>
+<p>La date vaut {{ date }} et le code raccourci {{ code_raccourci }}.</p>
+{% endif %}
+
+<form action="{% url "accueil" %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Soumettre la demande" />
+</form>
+
 {% endblock %}

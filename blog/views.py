@@ -93,10 +93,10 @@ def cree_proust(request):
     # en Python; mais *à l'intérieur* de Django.
     
     art = Article()
-    art.auteur  = "Robert Louis Stevenson"
-    art.titre   = "L'Ile au trésor"
-    art.slug    = "l-ile-au-tresor"
-    art.contenu = "Ils étaient cinq matelots sur le coffre du mort."
+    art.auteur  = "Marcel Proust"
+    art.titre   = "A l'ombre des jeunes filles en fleur"
+    art.slug    = "jeunes-filles-en-fleur"
+    art.contenu = "C'est toutes des putes... mais en fait je préfère les hommes."
     art.categorie = Categorie.objects.all()[0] # Ca sera "Crêpes"...
     art.save()
 

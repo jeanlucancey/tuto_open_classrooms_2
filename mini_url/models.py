@@ -10,5 +10,8 @@ class MiniURL(models.Model):
     nombre_acces = models.IntegerField(default=0)
 
     def __str__(self):
-        # return self.nom
-        return "Mini URL gloglo"
+        if len(self.pseudo_createur) > 0:
+            message = "%s-%s" % (self.pseudo_createur, self.url_longue)
+        else:
+            message = self.url_longue
+        return message

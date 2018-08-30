@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+   {% load static %}
+   <link rel="stylesheet" href="{% static "/css/style.css" %}" />
    <title>{% block title %}Mon raccourcisseur d'URL{% endblock %}</title>
 </head>
 <body>
+<header>Crêpes bretonnes</header>
+    <nav>
+       {% block nav %}
+       <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/mini_url/">Raccourcisseur d'URL</a></li>
+            <li><a href="/todito/">Todito</a></li>
+       </ul>
+       {% endblock %}
+   </nav>
    <section id="content">
        {% block content %}{% endblock %}
    </section>

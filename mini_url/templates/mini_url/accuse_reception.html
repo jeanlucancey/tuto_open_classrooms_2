@@ -1,0 +1,17 @@
+{% extends "base_url.html" %}
+{% block title %}Le raccourcisseur d'URL - C'est fait{% endblock %}
+{% block content %}
+<h1>Votre demande de raccourcissement a été validée</h1>
+
+{% if envoi %}
+<p>Votre demande a bien été envoyée.</p>
+<p>url_longue vaut {{ url_longue }}.</p>
+<p>pseudo_createur vaut {{ pseudo_createur }}.</p>
+<p>code_raccourci vaut {{ code_raccourci }}.</p>
+<p>date vaut {{ date }}.</p>
+{% else %}
+<p>Vous êtes bien sur la page de validation du raccourcissement,
+mais je pense n'avoir rien reçu. Dommage, non&nbsp;?</p>
+{% endif %}
+
+{% endblock %}
