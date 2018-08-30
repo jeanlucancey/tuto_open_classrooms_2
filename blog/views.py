@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
-from blog.models import Article, Contact
+from blog.models import Article, Categorie, Contact
 from .forms import ContactForm, ArticleForm
 
 def home(request):
@@ -93,10 +93,11 @@ def cree_proust(request):
     # en Python; mais *à l'intérieur* de Django.
     
     art = Article()
-    art.auteur  = "Georges Simenon"
-    art.titre   = "Maigret tend un piège"
-    art.slug    = "maigret-tend-un-piege"
-    art.contenu = "Un sadique tue des femmes la nuit dans le quartier des Halles"
+    art.auteur  = "Robert Louis Stevenson"
+    art.titre   = "L'Ile au trésor"
+    art.slug    = "l-ile-au-tresor"
+    art.contenu = "Ils étaient cinq matelots sur le coffre du mort."
+    art.categorie = Categorie.objects.all()[0] # Ca sera "Crêpes"...
     art.save()
 
     return HttpResponse(
@@ -155,3 +156,6 @@ def voir_contacts(request):
         'blog/voir_contacts.html', 
         {'contacts': Contact.objects.all()}
     )
+
+def todito(request):
+    return render(request, 'blog/todito.html', locals())

@@ -1,2 +1,6 @@
-<h1>Bienvenue sur mon blog</h1>
+{% extends "base.html" %}
+{% block title %}Le blog des crêpes bretonnes - La date{% endblock %}
+{% block content %}
+<h1>La date du jour</h1>
 <p>La date actuelle est : {{ date }}</p>
+{% endblock %}
