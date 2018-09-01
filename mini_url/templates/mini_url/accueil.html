@@ -4,14 +4,15 @@
 <h1>Bienvenue sur la page des raccourcisseurs d'URL&nbsp;!</h1>
 
 {% if envoi %}
-<p>Votre URL a bien été envoyée... sur cette page !</p>
-<p>La date vaut {{ date }} et le code raccourci {{ code_raccourci }}.</p>
-{% endif %}
-
+<p>Votre URL a bien été envoyée.</p>
+<p>Tant que je suis là, mentionnons que la date vaut {{ date }}
+et le code raccourci {{ code_raccourci }}.</p>
+{% else %}
 <form action="{% url "accueil" %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Soumettre la demande" />
 </form>
+{% endif %}
 
 {% endblock %}
