@@ -1,0 +1,17 @@
+{% extends "base_url.html" %}
+{% block title %}Voir les Mini-URL{% endblock %}
+{% block content %}
+
+<h1>Liste des Mini-URL</h1>
+{% for monUrl in mes_mini_url %}
+    <h2>{{ monUrl.url_longue }}</h2>
+<p>
+  <b>Raccourci :</b> {{ monUrl.code_raccourci }}<br />
+  <b>Date :</b> {{ monUrl.date }}<br />
+  <b>Pseudo-créateur :</b> {{ monUrl.pseudo_createur }}<br />
+  <b>Nombre d'accès :</b> {{ monUrl.nombre_acces }}<br />
+  -----
+</p>
+{% endfor %}
+
+{% endblock %}

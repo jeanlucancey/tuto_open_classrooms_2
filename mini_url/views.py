@@ -11,7 +11,7 @@ def accueil(request):
     if form.is_valid():
         url_longue      = form.cleaned_data['url_longue']
         pseudo_createur = form.cleaned_data['pseudo_createur']
-        code_raccourci  = "http://je_suis_accueil." + generer(5)
+        code_raccourci  = "http://jla.ly/" + generer(5)
         date            = timezone.now()
         nombre_acces    = 0
 
@@ -33,3 +33,22 @@ def generer(nb_caracteres):
     aleatoire = [random.choice(caracteres) for _ in range(nb_caracteres)]
 
     return ''.join(aleatoire)
+
+def voir_mini_url(request):
+    mes_mini_url = MiniURL.objects.all() # Nous sélectionnons tous nos articles
+    tabMiniUrl = []
+    for e in mes_mini_url:
+        tabMiniUrl.append(e)
+    # mes_mini_url est un QuerySet, tabMiniUrl est un bête tableau
+    # sur lequel je peux faire un tri à bulles à la con... ce qui est
+    # sûrement une mauvaise idée, mais c'est la seule que j'aie
+    nbElts = len(tabMiniUrl)
+    for numElt1 in range(len(tabMiniUrl) - 1):
+        for numElt2 in range(numElt1, len(tabMiniUrl)):
+            accesElt1 = tabMiniUrl[numElt1].nombre_acces
+            accesElt2 = tabMiniUrl[numElt2].nombre_acces
+            if accesElt2 > accesElt1:
+                intermed = tabMiniUrl[numElt1]
+                tabMiniUrl[numElt1] = tabMiniUrl[numElt2]
+                tabMiniUrl[numElt2] = intermed
+    return render(request, 'mini_url/voir_mini_url.html', {'mes_mini_url': tabMiniUrl})

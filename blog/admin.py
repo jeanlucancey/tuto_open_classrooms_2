@@ -3,10 +3,10 @@ from blog.models import Categorie, Article, Contact
 
 class ArticleAdmin(admin.ModelAdmin):
 
-    # La ligne qui suit est censée remplir le slug avec du Javascript... mais
-    # ça ne marche pas en l'inscrivant ici. Où d'autre? Mystère.
+    # La ligne qui suit est censée remplir le slug avec du Javascript... et
+    # ça a fini par marcher, mais pas du premier coup. Pourquoi? Mystère.
     prepopulated_fields = {'slug': ('titre', ), }
-    # Autre syntaxe suggérée et que je ne parviens pas non plus à faire fonctionner:
+    # Autre syntaxe suggérée et que je ne parvenais pas à faire fonctionner:
     # prepopulated_fields = {'slug': ['titre'] }
 
     # Configuration de la liste d'articles
