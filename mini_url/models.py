@@ -3,7 +3,10 @@ from django.utils import timezone
 
 class MiniURL(models.Model):
     url_longue = models.URLField(max_length=255, unique=True)
-    code_raccourci = models.CharField(max_length=20, unique=True)
+    # code_raccourci = models.CharField(max_length=20, unique=True)
+    # Je supprime unique=True parce que ca nique le formulaire
+    # de raccourci_vers_url
+    code_raccourci = models.CharField(max_length=20)
     date = models.DateTimeField(default=timezone.now,
                                 verbose_name="Date de creation")
     pseudo_createur = models.CharField(max_length=50)

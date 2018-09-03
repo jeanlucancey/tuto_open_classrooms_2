@@ -60,9 +60,13 @@ def raccourci_vers_url(request):
     # Cette méthode renvoie False s'il n'y a pas de données
     # dans le formulaire ou qu'il contient des erreurs.
     if form.is_valid():
-        # Ici nous pouvons traiter les données du formulaire
+        # Ici nous traitons les données du formulaire
         code_raccourci = form.cleaned_data['code_raccourci']
-        # url_longue = form.cleaned_data['url_longue']
-        # nombre_acces = form.cleaned_data['nombre_acces']
+        url_longue = "rien de bon"
+        for monUrl in MiniURL.objects.all():
+            if monUrl.code_raccourci == code_raccourci:
+                url_longue = monUrl.url_longue
+                monUrl.nombre_acces += 1
+                monUrl.save()
         envoi = True
     return render(request, 'mini_url/raccourci_vers_url.html', locals())

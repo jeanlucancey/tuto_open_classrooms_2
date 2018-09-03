@@ -4,7 +4,13 @@
 <h1>Du raccourci vers l'URL complète</h1>
 
 {% if envoi %}
-    <p>Votre raccourci a bien été envoyé.</p>
+    <p>Votre raccourci ({{ code_raccourci }}) a bien été envoyé.</p>
+    {% if url_longue == "rien de bon" %}
+        <p>Malheureusement, rien ne correspond à ce raccourci.</p>
+    {% else %}
+        <p>Sauf erreur, ce raccourci correspond à l'URL
+          <a href="{{ url_longue }}">{{ url_longue }}</a>.</p>
+    {% endif %}
 {% else %}
 <form action="{% url "raccourci_vers_url" %}" method="post">
     {% csrf_token %}
