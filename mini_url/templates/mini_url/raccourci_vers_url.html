@@ -1,0 +1,16 @@
+{% extends "base_url.html" %}
+{% block title %}Le raccourcisseur d'URL - Redirection{% endblock %}
+{% block content %}
+<h1>Du raccourci vers l'URL complète</h1>
+
+{% if envoi %}
+    <p>Votre raccourci a bien été envoyé.</p>
+{% else %}
+<form action="{% url "raccourci_vers_url" %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Soumettre la demande" />
+</form>
+{% endif %}
+
+{% endblock %}
