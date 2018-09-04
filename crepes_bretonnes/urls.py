@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('blog/', include('blog.urls')),
     path('bloblo/<int:nombre1>', views.afficher_article, name='afficher_article'),
+    path('todito/', views.todito, name='todito'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

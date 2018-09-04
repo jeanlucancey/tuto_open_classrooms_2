@@ -30,13 +30,13 @@ def view_redirection(request):
 def list_articles(request, month, year):
     """ Liste des articles d'un mois précis. """
     return HttpResponse(
-        "Vous avez demandé les articles de {0} {1}.".format(month, year)  
+        "Vous avez demandé les articles de {0} {1}.".format(month, year)
     )
 
 def list_articles_by_tag(request, tag):
     """ Liste des articles d'un mois précis. """
     return HttpResponse(
-        "Vous avez demandé le tag {}.".format(tag)  
+        "Vous avez demandé le tag {}.".format(tag)
     )
 
 def ma_page(request):
@@ -59,7 +59,7 @@ def afficher_article(request, nombre1):
 
 def lire(request, id):
     # Appel de la page de blog juste par son id
-    
+
     # Methode bavarde
 #    try:
 #        article = Article.objects.get(id=id)
@@ -68,20 +68,20 @@ def lire(request, id):
 
     # Raccourci
     article = get_object_or_404(Article, id=id)
-    
+
     return render(request, 'blog/lire.html', {'article':article})
 
 def lire2(request, id, slug):
     # Appel de la page de blog avec son id et son slug
-    
+
     article = get_object_or_404(Article, id=id, slug=slug)
-    
+
     return render(request, 'blog/lire2.html', {'article':article})
 
 def date_actuelle(request):
     return render(request, 'blog/date.html', {'date': datetime.now()})
 
-def addition(request, nombre1, nombre2):    
+def addition(request, nombre1, nombre2):
     total = nombre1 + nombre2
 
     # Retourne nombre1, nombre2 et la somme des deux au tpl
@@ -91,7 +91,7 @@ def cree_proust(request):
     # Croyez-le si vous voulez, mais ça marche: je peux faire
     # bouffer des choses à la base de données Sqlite depuis un script
     # en Python; mais *à l'intérieur* de Django.
-    
+
     art = Article()
     art.auteur  = "Georges Simenon"
     art.titre   = "Maigret tend un piège"
@@ -109,27 +109,27 @@ def contact(request):
     # à la page.
     form = ContactForm(request.POST or None)
     # Nous vérifions que les données envoyées sont valides
-    # Cette méthode renvoie False s'il n'y a pas de données 
+    # Cette méthode renvoie False s'il n'y a pas de données
     # dans le formulaire ou qu'il contient des erreurs.
-    if form.is_valid(): 
+    if form.is_valid():
         # Ici nous pouvons traiter les données du formulaire
         sujet = form.cleaned_data['sujet']
         message = form.cleaned_data['message']
         envoyeur = form.cleaned_data['envoyeur']
         renvoi = form.cleaned_data['renvoi']
 
-        # Nous pourrions ici envoyer l'e-mail grâce aux données 
+        # Nous pourrions ici envoyer l'e-mail grâce aux données
         # que nous venons de récupérer
         envoi = True
-    
+
     # Quoiqu'il arrive, on affiche la page du formulaire.
     return render(request, 'blog/contact.html', locals())
 
 def article_contact(request):
     form = ArticleForm(request.POST or None)
-    if form.is_valid(): 
+    if form.is_valid():
         envoi = True
-    
+
     # Quoiqu'il arrive, on affiche la page du formulaire.
     return render(request, 'blog/article_contact.html', locals())
 
@@ -145,13 +145,16 @@ def nouveau_contact(request):
         sauvegarde = True
 
     return render(request, 'contact.html', {
-        'form': form, 
+        'form': form,
         'sauvegarde': sauvegarde
     })
 
 def voir_contacts(request):
     return render(
-        request, 
-        'blog/voir_contacts.html', 
+        request,
+        'blog/voir_contacts.html',
         {'contacts': Contact.objects.all()}
     )
+
+def todito(request):
+    return render(request, 'blog/todito.html', locals())
