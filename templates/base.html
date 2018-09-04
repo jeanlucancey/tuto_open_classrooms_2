@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-   <link rel="stylesheet" href="/media/css/style.css" />
-   <title>{% block title %}Mon blog sur les crêpes bretonnes{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static "/css/style.css" %}" />
+  <title>{% block title %}Mon blog sur les crêpes bretonnes{% endblock %}</title>
 </head>
 <body>
 <header>Crêpes bretonnes</header>

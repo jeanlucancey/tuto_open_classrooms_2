@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
-from blog.models import Article, Contact
+from blog.models import Article, Categorie, Contact
 from .forms import ContactForm, ArticleForm
 
 def home(request):
@@ -88,15 +88,12 @@ def addition(request, nombre1, nombre2):
     return render(request, 'blog/addition.html', locals())
 
 def cree_proust(request):
-    # Croyez-le si vous voulez, mais ça marche: je peux faire
-    # bouffer des choses à la base de données Sqlite depuis un script
-    # en Python; mais *à l'intérieur* de Django.
-
     art = Article()
-    art.auteur  = "Georges Simenon"
-    art.titre   = "Maigret tend un piège"
-    art.slug    = "maigret-tend-un-piege"
-    art.contenu = "Un sadique tue des femmes la nuit dans le quartier des Halles"
+    art.auteur  = "Léon Tolstoï"
+    art.titre   = "Guerre et paix"
+    art.slug    = "guerre-et-paix"
+    art.contenu = "Le prince Bolkonski, c'est rien qu'un franc-mac illuminati reptilien."
+    art.categorie = Categorie.objects.all()[0] # Ca sera "Crêpes"...
     art.save()
 
     return HttpResponse(
